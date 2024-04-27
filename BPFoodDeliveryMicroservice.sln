@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Angular", "Angular", "{A4576F88-BCEE-4069-8E5E-F3FCC0C2A0A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{FF435F2D-93E4-4608-8B08-0B46E210BD09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{80D87425-C543-4A99-A374-1C8548F09C0D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{85988AB3-AE1E-4EB0-A9C9-466388420639}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPFoodDeliveryMicroservice.Services.CouponAPI", "BPFoodDeliveryMicroservice.Services.CouponAPI\BPFoodDeliveryMicroservice.Services.CouponAPI.csproj", "{FF12806F-600F-43BC-847C-318535CC22BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF12806F-600F-43BC-847C-318535CC22BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF12806F-600F-43BC-847C-318535CC22BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF12806F-600F-43BC-847C-318535CC22BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF12806F-600F-43BC-847C-318535CC22BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACD1DFBA-F8BB-4BDD-B54C-AE9051C3E53E}
+	EndGlobalSection
+EndGlobal
