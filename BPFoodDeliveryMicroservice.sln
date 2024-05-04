@@ -11,7 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{85988AB3-AE1E-4EB0-A9C9-466388420639}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPFoodDeliveryMicroservice.Services.CouponAPI", "BPFoodDeliveryMicroservice.Services.CouponAPI\BPFoodDeliveryMicroservice.Services.CouponAPI.csproj", "{FF12806F-600F-43BC-847C-318535CC22BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BPFoodDeliveryMicroservice.Services.CouponAPI", "BPFoodDeliveryMicroservice.Services.CouponAPI\BPFoodDeliveryMicroservice.Services.CouponAPI.csproj", "{FF12806F-600F-43BC-847C-318535CC22BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{629CC243-BA20-46A5-B501-CF6B83FE50C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BPFoodDeliveryMicroservice.Web", "BPFoodDeliveryMicroservice.Web\BPFoodDeliveryMicroservice.Web.csproj", "{29FA8E7E-8B0E-4111-A4C5-2782884C1D67}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BPFoodDeliveryMicroservice.Client", "BPFoodDeliveryMicroservice.Client\BPFoodDeliveryMicroservice.Client.esproj", "{7DD33DB6-877A-4BE2-8E83-9CF045C7AF4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,9 +29,23 @@ Global
 		{FF12806F-600F-43BC-847C-318535CC22BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF12806F-600F-43BC-847C-318535CC22BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF12806F-600F-43BC-847C-318535CC22BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29FA8E7E-8B0E-4111-A4C5-2782884C1D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29FA8E7E-8B0E-4111-A4C5-2782884C1D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29FA8E7E-8B0E-4111-A4C5-2782884C1D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29FA8E7E-8B0E-4111-A4C5-2782884C1D67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD33DB6-877A-4BE2-8E83-9CF045C7AF4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD33DB6-877A-4BE2-8E83-9CF045C7AF4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD33DB6-877A-4BE2-8E83-9CF045C7AF4A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7DD33DB6-877A-4BE2-8E83-9CF045C7AF4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD33DB6-877A-4BE2-8E83-9CF045C7AF4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD33DB6-877A-4BE2-8E83-9CF045C7AF4A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{29FA8E7E-8B0E-4111-A4C5-2782884C1D67} = {629CC243-BA20-46A5-B501-CF6B83FE50C7}
+		{7DD33DB6-877A-4BE2-8E83-9CF045C7AF4A} = {A4576F88-BCEE-4069-8E5E-F3FCC0C2A0A6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ACD1DFBA-F8BB-4BDD-B54C-AE9051C3E53E}

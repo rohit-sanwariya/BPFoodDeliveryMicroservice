@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BPFoodDeliveryMicroservice.Services.CouponAPI.Models;
+namespace BPFoodDeliveryMicroservice.Services.Web.Models;
 
 public class Coupon
 {

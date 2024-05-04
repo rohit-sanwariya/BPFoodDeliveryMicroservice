@@ -1,0 +1,28 @@
+<h1 id="tableLabel">Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="store.loading()">
+  
+    <mat-spinner></mat-spinner>
+
+</p>
+
+<table *ngIf="store.data().length">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>code. (C)</th>
+      <th>discount. (F)</th>
+      <th>minAmount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let coupon of store.data()">
+      <td>{{ coupon.id }}</td>
+      <td>{{ coupon.code }}</td>
+      <td>{{ coupon.discount }}</td>
+      <td>{{ coupon.minAmount }}</td>
+    </tr>
+  </tbody>
+</table>
