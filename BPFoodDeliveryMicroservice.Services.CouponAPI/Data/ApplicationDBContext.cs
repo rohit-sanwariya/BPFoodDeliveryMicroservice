@@ -8,6 +8,7 @@ public class ApplicationDBContext(DbContextOptions<ApplicationDBContext> options
     public DbSet<Coupon> Coupons { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Coupon>().HasIndex(c => c.Code).IsUnique();
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Coupon>().HasData(new Coupon { 
         Code = "Coupon100001",

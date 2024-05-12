@@ -32,7 +32,7 @@ namespace BPFoodDeliveryMicroservice.Services.CouponAPI.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Discount")
                         .HasColumnType("float");
@@ -45,6 +45,9 @@ namespace BPFoodDeliveryMicroservice.Services.CouponAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Code")
+                        .IsUnique();
+
                     b.ToTable("Coupons");
 
                     b.HasData(
@@ -53,7 +56,7 @@ namespace BPFoodDeliveryMicroservice.Services.CouponAPI.Migrations
                             Id = 1,
                             Code = "Coupon100001",
                             Discount = 20.0,
-                            LastUpdated = new DateTime(2024, 4, 27, 14, 4, 7, 425, DateTimeKind.Local).AddTicks(7125),
+                            LastUpdated = new DateTime(2024, 5, 11, 22, 4, 0, 562, DateTimeKind.Local).AddTicks(754),
                             MinAmount = 80
                         },
                         new
@@ -61,7 +64,7 @@ namespace BPFoodDeliveryMicroservice.Services.CouponAPI.Migrations
                             Id = 2,
                             Code = "Coupon100002",
                             Discount = 10.0,
-                            LastUpdated = new DateTime(2024, 4, 27, 14, 4, 7, 425, DateTimeKind.Local).AddTicks(7179),
+                            LastUpdated = new DateTime(2024, 5, 11, 22, 4, 0, 562, DateTimeKind.Local).AddTicks(827),
                             MinAmount = 800
                         });
                 });

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authGuard } from './Guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -7,6 +8,7 @@ const routes: Routes = [
   },
   {
     path:'coupon',loadComponent:()=>import('./Screens/coupon-page/coupon-page.component').then(m=>m.CouponPageComponent),
+    canActivate:[authGuard]
   },
 ];
 

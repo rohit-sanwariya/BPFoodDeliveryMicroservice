@@ -5,6 +5,7 @@ using BPFoodDeliveryMicroservice.Services.CouponAPI.DTOs;
 using BPFoodDeliveryMicroservice.Services.CouponAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using static Azure.Core.HttpHeader;
 
@@ -17,7 +18,7 @@ namespace BPFoodDeliveryMicroservice.Services.CouponAPI.Controllers
         private readonly ApplicationDBContext _db;
         private readonly IMapper _mapper;
         private ResponseDTO<CouponDTO> ResponseItem = new();
-        private ResponseDTO<CouponCreateDTO> ResponseCreateItem = new();
+        private ResponseDTO<CouponDTO> ResponseCreateItem = new();
         private ResponseDTO<IEnumerable<CouponDTO>> ResponseList = new();
         public CouponController(ApplicationDBContext db,IMapper mapper)
         {
@@ -30,7 +31,7 @@ namespace BPFoodDeliveryMicroservice.Services.CouponAPI.Controllers
         {
             try
             {
-                IEnumerable<Coupon> coupons = _db.Coupons.ToList();
+                IEnumerable<Coupon> coupons = _db.Coupons.OrderByDescending(o => o.LastUpdated).ToList();
                 IEnumerable<CouponDTO> dtos = _mapper.Map<IEnumerable<CouponDTO>>(coupons);
                 ResponseList.Result = dtos;
                 ResponseList.IsSuccess = true;
@@ -84,40 +85,56 @@ namespace BPFoodDeliveryMicroservice.Services.CouponAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ResponseDTO<CouponCreateDTO>> CreateCoupon([FromBody] CouponCreateDTO coupon)
+        public ActionResult<ResponseDTO<CouponDTO>> CreateCoupon([FromBody] CouponCreateDTO coupon)
         {
             try {
                 Coupon coup = _mapper.Map<Coupon>(coupon);
                 var some = _db.Coupons.Add(coup);
                 _db.SaveChanges();
-                ResponseCreateItem.Result = coupon;
+                ResponseCreateItem.Result = _mapper.Map<CouponDTO>(coup);
                 ResponseCreateItem.IsSuccess = true;
                 return Ok(ResponseCreateItem);
             }
-            catch (Exception) {
-                ResponseCreateItem.Result = coupon;
+            catch (Exception ex) {
+                if (ex.InnerException is SqlException sqlException && sqlException.Number == 2601)
+                {
+                    ResponseCreateItem.Result = null;
+                    ResponseCreateItem.IsSuccess = false;
+                    ResponseCreateItem.Message = "Coupon Code already exist.";
+                    return StatusCode(400,ResponseCreateItem);
+               
+                }
+                ResponseCreateItem.Result = null;
                 ResponseCreateItem.IsSuccess = true;
                 return StatusCode(500,ResponseCreateItem);
             }
         }        
         [HttpPut]
-        public ActionResult<ResponseDTO<CouponCreateDTO>> UpdateCoupon([FromBody] CouponCreateDTO coupon)
+        public ActionResult<ResponseDTO<CouponDTO>> UpdateCoupon([FromBody] CouponCreateDTO coupon)
         {
             try {
-                Coupon coup = _mapper.Map<Coupon>(coupon);
-                var some = _db.Coupons.Update(coup);
+                Coupon cdb = _db.Coupons.FirstOrDefault(c=>coupon.Code == c.Code);
+                if(cdb == null)
+                {
+                    return NotFound(ResponseCreateItem);
+                }
+                cdb.LastUpdated = DateTime.Now;
+                cdb.Discount = coupon.Discount;
+                cdb.Code = coupon.Code;
+                cdb.MinAmount = coupon.MinAmount;
+                
                 _db.SaveChanges();
-                ResponseCreateItem.Result = coupon;
+                ResponseCreateItem.Result = _mapper.Map<CouponDTO>(cdb);
                 ResponseCreateItem.IsSuccess = true;
                 return Ok(ResponseCreateItem);
             }
             catch (Exception) {
-                ResponseCreateItem.Result = coupon;
+                ResponseCreateItem.Result = null;
                 ResponseCreateItem.IsSuccess = true;
                 return StatusCode(500,ResponseCreateItem);
             }
         }        
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public ActionResult<ResponseDTO<CouponCreateDTO>> DeleteCoupon(int id)
         {
             try {

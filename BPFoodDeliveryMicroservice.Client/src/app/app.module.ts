@@ -1,5 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,7 +8,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-
+import { bPInterceptor } from './Services/bpinterceptor.interceptor';
+import { ServerErrorHanlderService } from './Services/server-error-hanlder.service';
+import {MatSnackBarModule} from '@angular/material/snack-bar'
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,10 +20,18 @@ import { MatSortModule } from '@angular/material/sort';
     AppRoutingModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatSnackBarModule
+    
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+  
+    provideHttpClient(withInterceptors([bPInterceptor])),
+    {
+      provide:ErrorHandler,
+      useClass:ServerErrorHanlderService,
+    }
   ],
   bootstrap: [AppComponent]
 })

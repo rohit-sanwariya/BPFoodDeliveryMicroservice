@@ -2,7 +2,7 @@
 using BPFoodDeliveryMicroservice.Web.DTOs;
 using BPFoodDeliveryMicroservice.Web.Enums;
 using BPFoodDeliveryMicroservice.Web.Services.IServices;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace BPFoodDeliveryMicroservice.Web.Services
 {
@@ -23,7 +23,7 @@ namespace BPFoodDeliveryMicroservice.Web.Services
 
             if(requestDto.Payload != null)
             {
-                message.Content = new StringContent(JsonSerializer.Serialize(requestDto.Payload));
+                message.Content = new StringContent(JsonConvert.SerializeObject(requestDto.Payload));
             }
             HttpResponseMessage? apiresponse = null;
             message.Method = ResoveMethod(requestDto.ApiType);
@@ -31,7 +31,9 @@ namespace BPFoodDeliveryMicroservice.Web.Services
             if(apiresponse.IsSuccessStatusCode)
             {
                 var content = await apiresponse.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<ResponseDTO>(content);
+                var res = JsonConvert.DeserializeObject<ResponseDTO>(content);
+
+                return res;
             }
             else
             {

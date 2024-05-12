@@ -1,0 +1,33 @@
+<div>
+  <form class="h-100" (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="flex flex-col items-center">
+      @for (bpformcontrol of formControlList(); track bpformcontrol.order) {
+      <div class="form-row">
+        <app-bp-dyanmic-form-field
+          [bpFormControl]="bpformcontrol"
+          [form]="form"
+        ></app-bp-dyanmic-form-field>
+      </div>
+      }
+    </div>
+
+    <div class="flex flex-row justify-around align-middle" >
+      <button
+        type="button"
+        mat-raised-button
+        color="accent"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="!form.valid"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

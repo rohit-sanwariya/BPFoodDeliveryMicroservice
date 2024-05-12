@@ -1,0 +1,115 @@
+﻿@model IEnumerable<CouponDTO>
+
+@{
+    ViewBag.Title = "Coupons";
+}
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col">
+            <button class="btn btn-primary float-right" id="addCouponBtn">Add New Coupon</button>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Code</th>
+                <th>Discount</th>
+                <th>Min Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var coupon in Model)
+            {
+                <tr>
+                    <td>@coupon.Id</td>
+                    <td>@coupon.Code</td>
+                    <td>@coupon.Discount</td>
+                    <td>@coupon.MinAmount</td>
+                    <td>
+                        <button class="btn btn-primary editCouponBtn">Edit</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Add/Edit Coupon Modal -->
+<div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="couponModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="couponModalLabel">Add/Edit Coupon</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form for adding/editing coupon -->
+                <!-- Example: -->
+                <!-- <form id="couponForm">
+                    <div class="form-group">
+                        <label for="code">Code</label>
+                        <input type="text" class="form-control" id="code" placeholder="Coupon Code">
+                    </div>
+                    <div class="form-group">
+                        <label for="discount">Discount</label>
+                        <input type="text" class="form-control" id="discount" placeholder="Discount">
+                    </div>
+                    <div class="form-group">
+                        <label for="minAmount">Min Amount</label>
+                        <input type="text" class="form-control" id="minAmount" placeholder="Minimum Amount">
+                    </div>
+                </form> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveCouponBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        // JavaScript/jQuery code for handling add and edit actions
+        // Example:
+        /*
+        $(document).ready(function () {
+            // Add new coupon button click event
+            $("#addCouponBtn").click(function () {
+                // Clear form fields if needed
+                // $("#code").val("");
+                // $("#discount").val("");
+                // $("#minAmount").val("");
+                // Show modal
+                $("#couponModal").modal("show");
+            });
+
+            // Edit coupon button click event
+            $(".editCouponBtn").click(function () {
+                // Get coupon ID from row
+                var couponId = $(this).closest("tr").find("td:first").text();
+                // Fetch coupon details using AJAX and populate form fields
+                // Show modal
+                $("#couponModal").modal("show");
+            });
+
+            // Save coupon button click event
+            $("#saveCouponBtn").click(function () {
+                // Validate form fields
+                // Example:
+                // var code = $("#code").val();
+                // var discount = $("#discount").val();
+                // var minAmount = $("#minAmount").val();
+                // Send AJAX request to server to save coupon
+                // Close modal
+                $("#couponModal").modal("hide");
+            });
+        });
+        */
+    </script>
+}

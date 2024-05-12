@@ -1,0 +1,5 @@
+<mat-dialog-content>
+  <div class="flex justify-center p-5">
+    <app-bp-dynamic-form (afterCancel)="dialogRef.close()" (afterSubmit)="onSubmit($event)" [formControlList]="formFields"></app-bp-dynamic-form>
+  </div>
+</mat-dialog-content>

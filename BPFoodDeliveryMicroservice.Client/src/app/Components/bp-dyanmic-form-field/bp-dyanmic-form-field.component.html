@@ -1,0 +1,33 @@
+<div [formGroup]="form()">
+    @switch (bpFormControl().controlType) {
+        @case ('textbox') {
+           <mat-form-field>
+            <mat-label [attr.for]="bpFormControl().key">{{bpFormControl().label}}</mat-label>
+            <input matInput   [formControlName]="bpFormControl().key"
+            [id]="bpFormControl().key" [type]="bpFormControl().type">
+           </mat-form-field>
+        }
+        @case ('dropdown') {
+         <mat-form-field>
+            <mat-label [attr.for]="bpFormControl().key">{{bpFormControl().label}}</mat-label>
+
+            <select [id]="bpFormControl().key" *ngSwitchCase="'dropdown'" [formControlName]="bpFormControl().key">
+                <option *ngFor="let opt of bpFormControl().options" [value]="opt.key">{{opt.value}}</option>
+              </select>
+         </mat-form-field>
+        }
+        @default {
+            <mat-form-field>
+                <mat-label [attr.for]="bpFormControl().key">{{bpFormControl().label}}</mat-label>
+                <input matInput   [formControlName]="bpFormControl().key"
+                [id]="bpFormControl().key" [type]="bpFormControl().type">
+               </mat-form-field>
+        }
+        }
+    
+  
+    @if (!isValid) {
+        <div class="text-red-500"  >{{bpFormControl().label}} is required</div>
+
+    }
+  </div>
