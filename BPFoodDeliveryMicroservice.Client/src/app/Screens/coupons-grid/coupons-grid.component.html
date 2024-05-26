@@ -1,0 +1,29 @@
+@if (store.loading()) {
+<div class="flex h-full justify-center align-middle">
+  <mat-spinner></mat-spinner>
+</div>
+}
+
+<div class="flex justify-end my-3 mx-8">
+  <button mat-raised-button color="accent" (click)="createCoupon()">Add</button>
+</div>
+<mat-grid-list cols="4">
+  @for (coupon of store.data(); track $index) {
+  <mat-grid-tile>
+    <mat-card class="h-1/2 max-h-48 w-1/2">
+      <mat-card-content>
+        <div class="p-2 h-100 flex w-100 items-center justify-center m-2">
+          {{ coupon.code }}
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="flex justify-around">
+       
+          <mat-icon color="accent" (click)="deleteRow(coupon)">delete</mat-icon>
+          <mat-icon color="primary" (click)="editRow(coupon)">edit</mat-icon>
+        
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+
+  }
+</mat-grid-list>

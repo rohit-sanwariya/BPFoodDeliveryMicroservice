@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^17.2.0",
     "@angular/platform-browser-dynamic": "^17.2.0",
     "@angular/router": "^17.2.0",
+    "@angular/service-worker": "^17.2.0",
     "@ngrx/operators": "^17.2.0",
     "@ngrx/signals": "^17.2.0",
     "jest-editor-support": "*",

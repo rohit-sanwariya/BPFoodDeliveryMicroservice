@@ -1,58 +1,37 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, effect, inject, viewChild } from '@angular/core';
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
 import { CouponStore } from '../../Store/Coupon/coupon.store';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { TCouponResponseItem } from './coupon.model';
-import { computed } from '@angular/core';
-import { BpFoodHeaderComponent } from '../../Components/bp-food-header/bp-food-header.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { BPTextboxField } from '../../Models/bptextbox-field';
+import { TCouponResponseItem } from '../coupon-page/coupon.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../Components/confirm-dialog/confirm-dialog.component';
-import { MatButtonModule } from '@angular/material/button';
 import { DialogFormComponent } from '../../Components/dialog-form/dialog-form.component';
-import { BPTextboxField } from '../../Models/bptextbox-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
-  selector: 'app-coupon-page',
+  selector: 'app-coupons-grid',
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    JsonPipe,
-    MatProgressSpinnerModule,
-    MatTableModule, MatPaginatorModule,
-    BpFoodHeaderComponent,
-    MatSortModule,
+    MatCardModule,
+    MatGridListModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatButtonModule,
+
   ],
-  templateUrl: './coupon-page.component.html',
-  styleUrl: './coupon-page.component.scss',
-  providers: [CouponStore],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers:[CouponStore],
+  templateUrl: './coupons-grid.component.html',
+  styleUrl: './coupons-grid.component.scss'
 })
-export default class CouponPageComponent implements OnInit {
-  paginator = viewChild.required(MatPaginator);
-  sort = viewChild.required(MatSort);
-  store = inject(CouponStore);
-  dataSource = computed(() => {
-    return new MatTableDataSource<TCouponResponseItem>(this.store.data());
-  });
-
-  displayedColumns: Array<keyof TCouponResponseItem | 'actions'> = ['id', 'code', 'discount', 'minAmount', 'actions']
-
-  constructor(public dialog: MatDialog) {
-    effect(() => {
-      this.dataSource().paginator = this.paginator();
-      this.dataSource().sort = this.sort()
-    })
-  }
-
+export default class CouponsGridComponent implements OnInit {
   ngOnInit(): void {
     this.store.getAll("");
   }
+  constructor(public dialog: MatDialog){}
+  store = inject(CouponStore);
   deleteRow(item: TCouponResponseItem): void {
     const ref = this.dialog.open(ConfirmDialogComponent, {
       data: { name: item.code },
